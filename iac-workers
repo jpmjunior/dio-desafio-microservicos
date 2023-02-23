@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo -e "###\nConfigurando clientes NFS\n###"
+apt-get install nfs-common -y
+mount -o v3 192.168.0.11:/var/lib/docker/volumes/app/_data /var/lib/docker/volumes/app/_data
