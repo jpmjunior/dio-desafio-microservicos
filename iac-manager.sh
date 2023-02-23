@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# IaC - Script de configuração de um serviço web clusterizado com Docker Swarm
+# IaC - Script de configuração de um serviço web clusterizado com Docker Swarm - Manager Node
 #
 # Pré-requesitos: 
 #   3 VMs Ubuntu com Docker Engine instalado;
@@ -21,6 +21,7 @@ docker rm --force web-server
 echo -e "###\nIniciando cluster Docker Swarm\n###"
 docker swarm init
 echo -e "###\nExecute o comando sugerido acima em todas as máquinas do cluster antes de continuar\n###"
+echo "Digite sim para continuar:"
 read ANY
 
 # Este comando deve ser executado somente após incluir todas a máquinas no cluster
