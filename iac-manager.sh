@@ -8,10 +8,11 @@
 
 echo -e "###\nIniciando e configurando NFS Server\n###"
 apt-get install nfs-server -y
-echo "/var/lib/docker/volumes/app/_data *(rw,sync,subtree_check)" >> /etc/exports
+echo "/var/lib/docker/volumes/app/_data *(rw,sync,subtree_check)" | tee -a /etc/exports
 exportfs -ar
 
 echo -e "###\nCriando container do proxy NGIX\n###"
+cd /var/lib/docker/volumes/app/_data
 docker build -t proxy-app .
 docker run --name my-proxy-app -dti -p 4500:4500 proxy-app
 
@@ -21,7 +22,7 @@ docker rm --force web-server
 echo -e "###\nIniciando cluster Docker Swarm\n###"
 docker swarm init
 echo -e "###\nExecute o comando sugerido acima em todas as máquinas do cluster antes de continuar\n###"
-echo "Digite sim para continuar:"
+echo "Digite qualquer tecla para continuar:"
 read ANY
 
 # Este comando deve ser executado somente após incluir todas a máquinas no cluster
